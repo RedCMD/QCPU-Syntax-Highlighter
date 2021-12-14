@@ -8,7 +8,7 @@ ffffffffffff
 ss
 dfmgnjkfgnfjk
 how to
-test
+tests
 
 ## Requirements
 
