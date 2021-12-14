@@ -4,6 +4,9 @@
 	"publisher": "RedCMD",
 	"description": "Syntax Highlighting for Extended QCPU Assembly code",
 	"version": "1.0.0",
+	"repository": {
+		"url": "https://github.com/RedCMD/Vscode-QCPU-Syntax-Highlighter"
+	},
 	"icon": "images/QSmally-logo-icon.png",
 	"engines": {
 		"vscode": "^1.47.0"
