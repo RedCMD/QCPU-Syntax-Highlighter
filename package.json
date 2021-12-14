@@ -1,0 +1,49 @@
+{
+	"name": "extended-qcpu-assembly-syntax-highlighter",
+	"displayName": "Extended QCPU Assembly Syntax Highlighter",
+	"publisher": "RedCMD",
+	"description": "Syntax Highlighting for Extended QCPU Assembly code",
+	"version": "1.0.0",
+	"icon": "images/QSmally-logo-icon.png",
+	"engines": {
+		"vscode": "^1.47.0"
+	},
+	"keywords": [
+		"qcpu",
+		"qos",
+		"qsmally",
+		"theredcmd"
+	],
+	"categories": [
+		"Programming Languages"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": ".qcpu",
+				"aliases": [
+					"RedCMD.QCPU"
+				],
+				"extensions": [
+					".qcpu",
+					".s"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": ".qcpu",
+				"scopeName": "source.redcmd.syntax.qcpu",
+				"path": "./syntaxes/qcpu.tmLanguage.json"
+			}
+		]
+	},
+	"__metadata": {
+		"id": "f6f952b4-03b5-45f1-b29e-d1947db37c37",
+		"publisherId": "6d229866-9775-4c10-9f86-f22eaa70eb66",
+		"publisherDisplayName": "RedCMD",
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1639378394182
+	}
+}

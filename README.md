@@ -4,11 +4,6 @@
 ## Features
 Highlights code
 
-ffffffffffff
-ss
-dfmgnjkfgnfjk
-how to
-tests
 
 ## Requirements
 

@@ -1,0 +1,202 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Simple QCPU Syntax",
+	"scopeName": "source.redcmd.syntax.qcpu",
+	"patterns": [
+		{ "include": "#comment"			},
+		{ "include": "#assembly"		},
+		{ "include": "#label"			},
+		{ "include": "#ascii-string"	},
+		{ "include": "#ascii-letter"	},
+		{ "include": "#numeric"			},
+		{ "include": "#array"			},
+		{ "include": "#conditions"		},
+		{ "include": "#ENUM"			},
+		{ "include": "#IF"				},
+		{ "include": "#ADDRESSABLE"		},
+		{ "include": "#DECLARE"			},
+		{ "include": "#HEADER"			},
+		{ "include": "#PAGE"			},
+		{ "include": "#OVERFLOWABLE"	},
+		{ "include": "#HEADERS"			},
+		{ "include": "#macro"			},
+		{ "include": "#register"		},
+		{ "include": "#condition"		},
+		{ "include": "#invalid"			}
+	],
+	"repository": {
+		"comment": {
+			"match": "(?://|;).*$",
+			"name": "comment"
+		},
+		"assembly": {
+			"match": "\\b(?:(?:MSC|PST|PLD|CPN|CND|IMM|RST|AST|INC|DEC|NEG|RSH|ADD|SUB|KRN|POI|BIT|JMP|MST|MLD)|(?:NOP|SPT|DSS|DLS|SPL|NTA|PCM)|(?:ENT|PPS|PPL|CPS|CPL|DDS|DDL|IBL)|(?:IOR|AND|XOR|IMP)|(?:FRK|TRM|CTX|PUB|ALC|DRP|CAL|RET))\\b",
+			"name": "keyword"
+		},
+		"label": {
+			"match": "\\.&?([\\w.@]+)\\b[:!+-]?",
+			"captures": {
+				"0": { "name": "support.function" },
+				"1": { "patterns": [ { "include": "#macro" } ], "name": "support.function" }
+			}
+		},
+		"ascii-string": {
+			"match": "(?<!\\w)(\\$)(\\w{2,})",
+			"captures": {
+				"1": { "name": "constant.numeric" },
+				"2": { "name": "constant.numeric markup.italic" }
+			}
+		},
+		"ascii-letter": {
+			"match": "(?<!\\w)(\\$)(\\w)",
+			"captures": {
+				"1": { "name": "constant.numeric" },
+				"2": { "name": "constant.numeric strong" }
+			}
+		},
+		"numeric": {
+			"patterns": [
+				{ "include": "#hexadecimal"	},
+				{ "include": "#binary"		},
+				{ "include": "#decimal"		},
+				{ "include": "#random"		}
+			]
+		},
+		"hexadecimal": {
+			"match": "0x\\h{,2}",
+			"name": "constant.numeric.hexidecmal"
+		},
+		"binary": {
+			"match": "0b[01]{,8}",
+			"name": "constant.numeric.binary"
+		},
+		"decimal": {
+			"match": "25[0-5]|2[0-4]\\d|1?\\d{1,2}",
+			"name": "constant.numeric.decimal"
+		},
+		"random": {
+			"match": "(%)(random)\\b",
+			"captures": {
+				"1": { "name": "support.class" },
+				"2": { "name": "constant.numeric.random" }
+			}
+		},
+		"array": {
+			"match": "%array\\b",
+			"captures": {
+				"0": { "name": "support.class" },
+				"1": { "name": "strong" }
+			}
+		},
+		"conditions": {
+			"match": "(?<!\\w)#(?:true|underflow|!?(?:cout|signed|zero))\\b",
+			"name": "variable.other.constant"
+		},
+		"OVERFLOWABLE": {
+			"match": "(@)(OVERFLOWABLE)",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "keyword.control" }
+			}
+		},
+		"ADDRESSABLE": {
+			"match": "(@)(ADDRESSABLE)(?:\\s+([^.]+)(\\.\\S+)?)?",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "keyword.control" },
+				"3": { "name": "string" },
+				"4": { "patterns": [ { "include": "#label" }, { "include": "#invalid" } ] }
+			}
+		},
+		"PAGE": {
+			"match": "(@)(PAGE)(?:\\s+(\\S+)(?:\\s+(\\S+))?)?",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "keyword.control" },
+				"3": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
+				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] }
+			}
+		},
+		"HEADER": {
+			"match": "(@)(HEADER)(?:\\s+([A-Z0-9]+)([^;]+)?)?",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "keyword.control" },
+				"3": { "name": "keyword.control" },
+				"4": { "patterns": [ { "include": "#HEADER-arguments" } ] }
+			}
+		},
+		"HEADER-arguments": {
+			"match": "(?:\\s+([^\\s;]+))([^;]+)?",
+			"captures": {
+				"1": { "patterns": [ { "include": "#label" }, { "include": "#numeric" }, { "include": "#macro" } ], "name": "string" },
+				"2": { "patterns": [ { "include": "#HEADER-arguments" } ] }
+			}
+		},
+		"HEADERS": {
+			"match": "(@)([A-Z0-9]+)([^;]+)?",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "keyword.control strong" },
+				"3": { "patterns": [ { "include": "#HEADER-arguments" } ] }
+			}
+		},
+		"assemble-flag": {
+			"match": "DEBUG",
+			"name": "header"
+		},
+		"ENUM": {
+			"begin": "(@)(ENUM)(?:\\s+(\\S+))?",
+			"end": "(@)(END)",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "keyword.control" },
+				"3": { "name": "string" }
+			},
+			"patterns": [
+				{ "include": "#comment"	},
+				{ "include": "#DECLARE"	},
+				{ "include": "#invalid"	}
+			]
+		},
+		"IF": {
+			"begin": "(@)(IF).*$",
+			"end": "(@)(END)",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "keyword.control" }
+			},
+			"patterns": [
+				{ "include": "$self" }
+			]
+		},
+		"DECLARE": {
+			"match": "(@)(DECLARE)(?:\\s+(\\w+)(?:\\s+(\\S+))?)?",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "keyword.control" },
+				"3": { "name": "keyword.control" },
+				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] }
+			}
+		},
+		"macro": {
+			"match": "(@)([\\w.*]+\\b)",
+			"captures": {
+				"1": { "name": "keyword.control markup.italic" },
+				"2": { "name": "keyword.control" }
+			}
+		},
+		"register": {
+			"match": "\\b(?:Zr|[A-D]|CXT|SPI|POI)\\b",
+			"name": "variable"
+		},
+		"condition": {
+			"match": "(?:Tr|U|!?[CSZ])\\b",
+			"name": "keyword.operator.condition"
+		},
+		"invalid": {
+			"match": "\\S",
+			"name": "invalid"
+		}
+	}
+}
