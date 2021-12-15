@@ -141,10 +141,6 @@
 				"3": { "patterns": [ { "include": "#HEADER-arguments" } ] }
 			}
 		},
-		"assemble-flag": {
-			"match": "DEBUG",
-			"name": "header"
-		},
 		"ENUM": {
 			"begin": "(@)(ENUM)(?:\\s+(\\S+))?",
 			"end": "(@)(END)",
