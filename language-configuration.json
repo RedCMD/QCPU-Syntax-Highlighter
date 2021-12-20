@@ -7,14 +7,28 @@
 	},
 	// symbols used as brackets
 	"brackets": [
-		["@IF", "@END"]
+		["@IF", "@END"],
+		["@ENUM", "@END"]
 	],
 	// symbols that are auto closed when typing
 	"autoClosingPairs": [
-		["@IF", "@END"]
+		["@IF", "@END"],
+		["@ENUM", "@END"]
 	],
 	// symbols that can be used to surround a selection
 	"surroundingPairs": [
-		["@IF", "@END"]
-	]
+		["@IF", "@END"],
+		["@ENUM", "@END"]
+	],
+	"autoCloseBefore": " \n\t",
+	"folding": {
+		"markers": {
+			"start": "^\\s*(@IF|@ENUM)",
+			"end": "^\\s*@END"
+		}
+	},
+	"indentationRules": {
+		"increaseIndentPattern": "^\\s*(\\.|@IF|@ELSE|@ENUM)",
+		"decreaseIndentPattern": "^\\s*(\\.|@ELSE|@END)"
+	}
 }
