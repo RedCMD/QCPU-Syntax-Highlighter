@@ -156,8 +156,20 @@
 			]
 		},
 		"IF": {
-			"begin": "(@)(IF).*$",
+			"begin": "(@)(IF).*",
 			"end": "(@)(END)",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "keyword.control" }
+			},
+			"patterns": [
+				{ "include": "#ELSE" },
+				{ "include": "$self" }
+			]
+		},
+		"ELSE": {
+			"begin": "(@)(ELSE)",
+			"end": "(?=@END)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" }
