@@ -30,7 +30,7 @@
 			"name": "comment"
 		},
 		"assembly": {
-			"match": "\\b(?:ADD|AND|AST|CND|CPL|CPN|CPS|DDS|DEC|DLS|ENT|IMM|IMP|INC|IOR|JMP|MDA|MLD|MMA|MSA|MST|NEG|NOP|NTA|PCM|PLD|POI|PPL|PPS|PST|RSH|RST|SPL|SUB|XOR)\\b",
+			"match": "\\b(?:ADD|AND|AST|CND|CPL|CPN|CPS|DSS|DEC|DLS|ENT|IMM|IMP|INC|IOR|JMP|MDA|MLD|MMA|MSA|MST|NEG|NOP|NTA|PCM|PLD|POI|PPL|PPS|PST|RSH|RST|SPL|SUB|XOR)\\b",
 			"name": "keyword"
 		},
 		"label": {
