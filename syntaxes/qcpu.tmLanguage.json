@@ -34,7 +34,7 @@
 			"name": "keyword"
 		},
 		"label": {
-			"match": "\\.&?([\\w.@]+)\\b[:!+-*]?",
+			"match": "\\.&?([\\w.@]+)\\b[:!*+-]?",
 			"captures": {
 				"0": { "name": "support.function" },
 				"1": { "patterns": [ { "include": "#macro" } ], "name": "support.function" }
