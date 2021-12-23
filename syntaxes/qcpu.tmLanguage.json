@@ -179,6 +179,13 @@
 				{ "include": "$self" }
 			]
 		},
+		"DROPTHROUGH": {
+			"match": "(@)(DROPTHROUGH)(?:\\s+([^;]+))?",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "keyword.control" }
+			}
+		},
 		"DECLARE": {
 			"match": "(@)(DECLARE)(?:\\s+(\\w+)(?:\\s+(\\S+))?)?",
 			"captures": {
