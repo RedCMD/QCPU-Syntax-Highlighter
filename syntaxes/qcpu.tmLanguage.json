@@ -5,12 +5,8 @@
 	"patterns": [
 		{ "include": "#comment"			},
 		{ "include": "#assembly"		},
-		{ "include": "#label"			},
-		{ "include": "#ascii-string"	},
-		{ "include": "#ascii-letter"	},
-		{ "include": "#numeric"			},
+		{ "include": "#random"			},
 		{ "include": "#array"			},
-		{ "include": "#conditions"		},
 		{ "include": "#ENUM"			},
 		{ "include": "#IF"				},
 		{ "include": "#ADDRESSABLE"		},
@@ -19,9 +15,7 @@
 		{ "include": "#PAGE"			},
 		{ "include": "#OVERFLOWABLE"	},
 		{ "include": "#HEADERS"			},
-		{ "include": "#macro"			},
-		{ "include": "#register"		},
-		{ "include": "#condition"		},
+		{ "include": "#operand"			},
 		{ "include": "#invalid"			}
 	],
 	"repository": {
@@ -39,6 +33,18 @@
 				"0": { "name": "support.function" },
 				"1": { "patterns": [ { "include": "#macro" } ], "name": "support.function" }
 			}
+		},
+		"operand": {
+			"patterns": [
+				{ "include": "#ascii-string"	},
+				{ "include": "#ascii-letter"	},
+				{ "include": "#conditions"		},
+				{ "include": "#condition"		},
+				{ "include": "#register"		},
+				{ "include": "#numeric"			},
+				{ "include": "#label"			},
+				{ "include": "#macro"			}
+			]
 		},
 		"ascii-string": {
 			"match": "(?<!\\w)(\\$)(\\w{2,})",
@@ -58,8 +64,7 @@
 			"patterns": [
 				{ "include": "#hexadecimal"	},
 				{ "include": "#binary"		},
-				{ "include": "#decimal"		},
-				{ "include": "#random"		}
+				{ "include": "#decimal"		}
 			]
 		},
 		"hexadecimal": {
@@ -129,7 +134,7 @@
 		"HEADER-arguments": {
 			"match": "(?:\\s+([^\\s;]+))([^;]+)?",
 			"captures": {
-				"1": { "patterns": [ { "include": "#label" }, { "include": "#numeric" }, { "include": "#macro" } ], "name": "string" },
+				"1": { "patterns": [ { "include": "#label" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#macro" } ], "name": "string" },
 				"2": { "patterns": [ { "include": "#HEADER-arguments" } ] }
 			}
 		},
@@ -164,6 +169,7 @@
 				"3": { "name": "keyword.operator" }
 			},
 			"patterns": [
+				{ "include": "#DROPTHROUGH" },
 				{ "include": "#ELSE" },
 				{ "include": "$self" }
 			]
@@ -180,10 +186,12 @@
 			]
 		},
 		"DROPTHROUGH": {
-			"match": "(@)(DROPTHROUGH)(?:\\s+([^;]+))?",
+			"match": "(@)(DROPTHROUGH)(?>\\s+([^\\s;]+)(?>\\s+([^\\s;]+))?)?",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
-				"2": { "name": "keyword.control" }
+				"2": { "name": "keyword.control" },
+				"3": { "patterns": [ { "include": "#assembly" }, { "include": "#invalid-illegal" } ] },
+				"4": { "patterns": [ { "include": "#operand" }, { "include": "#invalid-illegal" } ] }
 			}
 		},
 		"DECLARE": {
@@ -192,7 +200,7 @@
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
 				"3": { "name": "keyword.control" },
-				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] }
+				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#random" }, { "include": "#invalid" } ] }
 			}
 		},
 		"macro": {
@@ -209,6 +217,10 @@
 		"condition": {
 			"match": "(?:Tr|U|!?[CSZ])\\b",
 			"name": "keyword.operator.condition"
+		},
+		"invalid-illegal": {
+			"match": "\\S",
+			"name": "invalid.illegal markup.underline"
 		},
 		"invalid": {
 			"match": "\\S",
