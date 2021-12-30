@@ -117,6 +117,16 @@
 				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] }
 			}
 		},
+		"MAKEPAGE": {
+			"match": "(@)(MAKEPAGE)(?:\\s+(\\S+)(?:\\s+(\\S+)(?:\\s+(\\S+))?)?)?",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "keyword.control" },
+				"3": { "name": "keyword.control" },
+				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
+				"5": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] }
+			}
+		},
 		"HEADER": {
 			"match": "(@)(HEADER)(?:\\s+([A-Z0-9]+)([^;]+)?)?",
 			"captures": {
