@@ -104,7 +104,7 @@
 			}
 		},
 		"ADDRESSABLE": {
-			"match": "(@)(ADDRESSABLE)(?>\\s+([^.]+)(\\.\\S+)?)?",
+			"match": "(@)(ADDRESSABLE)(?>\\s+((?>(?!//)[^.;])+)(\\.(?>(?!//)[^\\s;])+)?)?",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
@@ -113,7 +113,7 @@
 			}
 		},
 		"PAGE": {
-			"match": "(@)(PAGE)(?>\\s+(\\S+)(?>\\s+(\\S+))?)?",
+			"match": "(@)(PAGE)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
@@ -122,7 +122,7 @@
 			}
 		},
 		"MAKEPAGE": {
-			"match": "(@)(MAKEPAGE)(?:\\s+(\\S+)(?:\\s+(\\S+)(?:\\s+(\\S+))?)?)?",
+			"match": "(@)(MAKEPAGE)(?:\\s+((?>(?!//)[^\\s;])+)(?:\\s+((?>(?!//)[^\\s;])+)(?:\\s+((?>(?!//)[^\\s;])+))?)?)?",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
@@ -132,7 +132,7 @@
 			}
 		},
 		"HEADER": {
-			"match": "(@)(HEADER)(?>\\s+([A-Z0-9]+)([^;]+)?)?",
+			"match": "(@)(HEADER)(?>\\s+([A-Z0-9]+)((?>(?!//)[^;])+)?)?",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
@@ -141,14 +141,14 @@
 			}
 		},
 		"HEADER-arguments": {
-			"match": "(?>\\s+([^\\s;]+))([^;]+)?",
+			"match": "(?>\\s+((?>(?!//)[^\\s;])+))((?>(?!//)[^;])+)?",
 			"captures": {
 				"1": { "patterns": [ { "include": "#label" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#macro" } ], "name": "string" },
 				"2": { "patterns": [ { "include": "#HEADER-arguments" } ] }
 			}
 		},
 		"HEADERS": {
-			"match": "(@)([A-Z0-9]+)([^;]+)?",
+			"match": "(@)([A-Z0-9]+)((?>(?!//)[^;])+)?",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control strong" },
@@ -156,7 +156,7 @@
 			}
 		},
 		"ENUM": {
-			"begin": "(@)(ENUM)(?>\\s+(\\S+))?",
+			"begin": "(@)(ENUM)(?>\\s+((?>(?!//)[^\\s;])+))?",
 			"end": "(@)(END)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
@@ -170,7 +170,7 @@
 			]
 		},
 		"IF": {
-			"begin": "(@)(IF)(?>\\s+(\\S+))?",
+			"begin": "(@)(IF)(?>\\s+((?>(?!//)[^\\s;])+))?",
 			"end": "(@)(END)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
@@ -195,7 +195,7 @@
 			]
 		},
 		"DROPTHROUGH": {
-			"match": "(@)(DROPTHROUGH)(?>\\s+([^\\s;]+)(?>\\s+([^\\s;]+))?)?",
+			"match": "(@)(DROPTHROUGH)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
@@ -204,7 +204,7 @@
 			}
 		},
 		"DECLARE": {
-			"match": "(@)(DECLARE)(?>\\s+(\\w+)(?>\\s+(\\S+))?)?",
+			"match": "(@)(DECLARE)(?>\\s+(\\w+)(?>\\s+((?>(?!//)[^\\s;])+))?)?",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
