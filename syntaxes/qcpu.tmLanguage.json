@@ -13,6 +13,7 @@
 		{ "include": "#DECLARE"			},
 		{ "include": "#HEADER"			},
 		{ "include": "#PAGE"			},
+		{ "include": "#MAKEPAGE"		},
 		{ "include": "#OVERFLOWABLE"	},
 		{ "include": "#HEADERS"			},
 		{ "include": "#operand"			},
@@ -122,13 +123,13 @@
 			}
 		},
 		"MAKEPAGE": {
-			"match": "(@)(MAKEPAGE)(?:\\s+((?>(?!//)[^\\s;])+)(?:\\s+((?>(?!//)[^\\s;])+)(?:\\s+((?>(?!//)[^\\s;])+))?)?)?",
+			"match": "(@)(MAKEPAGE)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?)?",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
-				"3": { "name": "keyword.control" },
-				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
-				"5": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] }
+				"3": { "name": "string" },
+				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid-illegal" } ] },
+				"5": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid-illegal" } ] }
 			}
 		},
 		"HEADER": {
