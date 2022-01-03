@@ -25,7 +25,7 @@
 			"name": "comment"
 		},
 		"assembly": {
-			"match": "\\b(?>ADD|AND|AST|CND|CPL|CPN|CPS|DEC|DLS|DSS|ENT|IMM|IMP|INC|IOR|JMP|MDA|MLD|MMA|MSA|MST|NEG|NOP|NTA|PCM|PLD|POI|PPL|PPS|PST|RSH|RST|SPL|SUB|XOR)\\b",
+			"match": "\\b(?>NOP|CPL|PPL|MSA|MDA|NTA|DFU|PCM|PST|PLD|CPN|CND|IMM|RST|AST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|IMP|BSL|BPL|BSR|BPR|CPS|PPS|ENT|JMP|BRH|MST|MLD)\\b",
 			"name": "keyword"
 		},
 		"label": {
