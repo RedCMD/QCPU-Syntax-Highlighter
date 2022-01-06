@@ -17,6 +17,7 @@
 		{ "include": "#OVERFLOWABLE"	},
 		{ "include": "#HEADERS"			},
 		{ "include": "#operand"			},
+		{ "include": "#comma"			},
 		{ "include": "#invalid"			}
 	],
 	"repository": {
@@ -223,6 +224,10 @@
 		"register": {
 			"match": "\\b(?>CXT|POI|SPI|[A-D]|Zr)\\b",
 			"name": "variable"
+		},
+		"comma": {
+			"match": "(?<!,),(?!,)",
+			"name": "keyword.operator"
 		},
 		"invalid-illegal": {
 			"match": "\\S",
