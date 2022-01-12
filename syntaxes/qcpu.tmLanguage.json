@@ -4,6 +4,7 @@
 	"scopeName": "source.redcmd.syntax.qcpu",
 	"patterns": [
 		{ "include": "#comment"			},
+		{ "include": "#label-address"	},
 		{ "include": "#assembly"		},
 		{ "include": "#random"			},
 		{ "include": "#array"			},
@@ -29,21 +30,28 @@
 			"match": "\\b(?>NOP|CPL|PPL|MSA|MDA|NTA|DFU|PCM|PST|PLD|CPN|CND|IMM|RST|AST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|IMP|BSL|BPL|BSR|BPR|CPS|PPS|ENT|JMP|BRH|MST|MLD)\\b",
 			"name": "keyword"
 		},
-		"label": {
-			"match": "\\.&?([\\w.@]+)[:!*+-]?",
+		"label-address": {
+			"match": "^\\s*\\.&?([\\w.@]+):",
 			"captures": {
 				"0": { "name": "support.function" },
-				"1": { "patterns": [ { "include": "#macro" } ], "name": "support.function" }
+				"1": { "name": "support.function", "patterns": [ { "include": "#macro" } ] }
+			}
+		},
+		"label-embed": {
+			"match": "\\.([\\w.@]+)!?\\+?",
+			"captures": {
+				"0": { "name": "support.function" },
+				"1": { "name": "support.function", "patterns": [ { "include": "#macro" } ] }
 			}
 		},
 		"operand": {
 			"patterns": [
 				{ "include": "#ascii-string"	},
 				{ "include": "#ascii-letter"	},
+				{ "include": "#label-embed"		},
 				{ "include": "#conditions"		},
 				{ "include": "#register"		},
 				{ "include": "#numeric"			},
-				{ "include": "#label"			},
 				{ "include": "#macro"			}
 			]
 		},
@@ -111,7 +119,7 @@
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
 				"3": { "name": "string" },
-				"4": { "patterns": [ { "include": "#label" }, { "include": "#invalid" } ] }
+				"4": { "patterns": [ { "include": "#label-embed" }, { "include": "#invalid" } ] }
 			}
 		},
 		"PAGE": {
@@ -145,7 +153,7 @@
 		"HEADER-arguments": {
 			"match": "(?>\\s+((?>(?!//)[^\\s;])+))((?>(?!//)[^;])+)?",
 			"captures": {
-				"1": { "patterns": [ { "include": "#label" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#macro" } ], "name": "string" },
+				"1": { "patterns": [ { "include": "#label-embed" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#macro" } ], "name": "string" },
 				"2": { "patterns": [ { "include": "#HEADER-arguments" } ] }
 			}
 		},
