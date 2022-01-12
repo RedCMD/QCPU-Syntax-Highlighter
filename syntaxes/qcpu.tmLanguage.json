@@ -114,7 +114,7 @@
 			}
 		},
 		"ADDRESSABLE": {
-			"match": "(@)(ADDRESSABLE)(?>\\s+((?>(?!//)[^;])+)(\\.(?>(?!//)[^\\s;])+)?)?(.*)",
+			"match": "(@)(ADDRESSABLE)(?>\\s+((?>(?!//)[^\\s;.])+)(\\.(?>(?!//)[^\\s;])+)?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
