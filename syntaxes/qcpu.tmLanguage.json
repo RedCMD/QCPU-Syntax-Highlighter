@@ -245,6 +245,10 @@
 			"match": "(?<!,),(?!,)",
 			"name": "keyword.operator"
 		},
+		"string": {
+			"match": "[\\w*.-]+",
+			"name": "string"
+		},
 		"invalid-illegal": {
 			"match": "\\S",
 			"name": "invalid.illegal markup.underline"
