@@ -77,15 +77,15 @@
 			]
 		},
 		"hexadecimal": {
-			"match": "0x\\h{,2}",
+			"match": "\\b0x\\h{,2}",
 			"name": "constant.numeric.hexidecmal"
 		},
 		"binary": {
-			"match": "0b[01]{,8}",
+			"match": "\\b0b[01]{,8}",
 			"name": "constant.numeric.binary"
 		},
 		"decimal": {
-			"match": "25[0-5]|2[0-4]\\d|1?\\d{1,2}",
+			"match": "\\b(?>25[0-5]|2[0-4]\\d|1?\\d{1,2})",
 			"name": "constant.numeric.decimal"
 		},
 		"random": {
