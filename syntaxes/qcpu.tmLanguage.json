@@ -58,15 +58,15 @@
 		"ascii-string": {
 			"match": "(?<!\\w)(\\$)(\\w{2,})",
 			"captures": {
-				"1": { "name": "constant.numeric" },
-				"2": { "name": "constant.numeric markup.italic" }
+				"1": { "name": "constant.character.escape markup.italic" },
+				"2": { "name": "string" }
 			}
 		},
 		"ascii-letter": {
 			"match": "(?<!\\w)(\\$)(\\w)",
 			"captures": {
-				"1": { "name": "constant.numeric" },
-				"2": { "name": "constant.numeric strong" }
+				"1": { "name": "constant.character.escape" },
+				"2": { "name": "string" }
 			}
 		},
 		"numeric": {
