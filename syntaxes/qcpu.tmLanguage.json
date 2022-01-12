@@ -153,19 +153,19 @@
 				"4": { "patterns": [ { "include": "#HEADER-arguments" } ] }
 			}
 		},
-		"HEADER-arguments": {
-			"match": "(?>\\s+((?>(?!//)[^\\s;])+))((?>(?!//)[^;])+)?",
-			"captures": {
-				"1": { "patterns": [ { "include": "#label-embed" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#macro" } ], "name": "string" },
-				"2": { "patterns": [ { "include": "#HEADER-arguments" } ] }
-			}
-		},
 		"HEADERS": {
 			"match": "(@)([A-Z0-9]+)((?>(?!//)[^;])+)?",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control strong" },
 				"3": { "patterns": [ { "include": "#HEADER-arguments" } ] }
+			}
+		},
+		"HEADER-arguments": {
+			"match": "(?>\\s+((?>(?!//)[^\\s;])+))((?>(?!//)[^;])+)?",
+			"captures": {
+				"1": { "patterns": [ { "include": "#macro" }, { "include": "#label-embed" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#assembly" }, { "include": "#string" } ], "name": "string" },
+				"2": { "patterns": [ { "include": "#HEADER-arguments" } ] }
 			}
 		},
 		"ENUM": {
