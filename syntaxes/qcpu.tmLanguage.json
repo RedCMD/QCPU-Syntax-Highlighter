@@ -114,31 +114,34 @@
 			}
 		},
 		"ADDRESSABLE": {
-			"match": "(@)(ADDRESSABLE)(?>\\s+((?>(?!//)[^.;])+)(\\.(?>(?!//)[^\\s;])+)?)?",
+			"match": "(@)(ADDRESSABLE)(?>\\s+((?>(?!//)[^;])+)(\\.(?>(?!//)[^\\s;])+)?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
 				"3": { "name": "string" },
-				"4": { "patterns": [ { "include": "#label-embed" }, { "include": "#invalid" } ] }
+				"4": { "patterns": [ { "include": "#label-embed" }, { "include": "#invalid" } ] },
+				"5": { "name": "invalid" }
 			}
 		},
 		"PAGE": {
-			"match": "(@)(PAGE)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?",
+			"match": "(@)(PAGE)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
 				"3": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
-				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] }
+				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
+				"5": { "name": "invalid" }
 			}
 		},
 		"MAKEPAGE": {
-			"match": "(@)(MAKEPAGE)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?)?",
+			"match": "(@)(MAKEPAGE)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
 				"3": { "name": "string" },
-				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid-illegal" } ] },
-				"5": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid-illegal" } ] }
+				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
+				"5": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
+				"6": { "name": "invalid" }
 			}
 		},
 		"HEADER": {
@@ -166,12 +169,13 @@
 			}
 		},
 		"ENUM": {
-			"begin": "(@)(ENUM)(?>\\s+((?>(?!//)[^\\s;])+))?",
+			"begin": "(@)(ENUM)(?>\\s+((?>(?!//)[^\\s;])+))?(.*)",
 			"end": "(@)(END)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
-				"3": { "name": "string" }
+				"3": { "name": "string" },
+				"4": { "name": "invalid" }
 			},
 			"patterns": [
 				{ "include": "#comment"	},
@@ -180,12 +184,13 @@
 			]
 		},
 		"IF": {
-			"begin": "(@)(IF)(?>\\s+((?>(?!//)[^\\s;])+))?",
+			"begin": "(@)(IF)(?>\\s+((?>(?!//)[^\\s;])+))?(.*)",
 			"end": "(@)(END)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
-				"3": { "name": "keyword.operator" }
+				"3": { "name": "keyword.operator" },
+				"4": { "name": "invalid" }
 			},
 			"patterns": [
 				{ "include": "#DROPTHROUGH" },
@@ -194,32 +199,35 @@
 			]
 		},
 		"ELSE": {
-			"begin": "(@)(ELSE)",
+			"begin": "(@)(ELSE)(.*)",
 			"end": "(?=@END)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
-				"2": { "name": "keyword.control" }
+				"2": { "name": "keyword.control" },
+				"3": { "name": "invalid" }
 			},
 			"patterns": [
 				{ "include": "$self" }
 			]
 		},
 		"DROPTHROUGH": {
-			"match": "(@)(DROPTHROUGH)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?",
+			"match": "(@)(DROPTHROUGH)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
-				"3": { "patterns": [ { "include": "#assembly" }, { "include": "#invalid-illegal" } ] },
-				"4": { "patterns": [ { "include": "#operand" }, { "include": "#invalid-illegal" } ] }
+				"3": { "patterns": [ { "include": "#assembly" }, { "include": "#invalid" } ] },
+				"4": { "patterns": [ { "include": "#operand" }, { "include": "#invalid" } ] },
+				"5": { "name": "invalid" }
 			}
 		},
 		"DECLARE": {
-			"match": "(@)(DECLARE)(?>\\s+(\\w+)(?>\\s+((?>(?!//)[^\\s;])+))?)?",
+			"match": "(@)(DECLARE)(?>\\s+(\\w+)(?>\\s+((?>(?!//)[^\\s;])+))?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
 				"3": { "name": "keyword.control" },
-				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#random" }, { "include": "#invalid" } ] }
+				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#random" }, { "include": "#invalid" } ] },
+				"5": { "name": "invalid" }
 			}
 		},
 		"macro": {
