@@ -207,6 +207,7 @@
 				"3": { "name": "invalid" }
 			},
 			"patterns": [
+				{ "include": "#DROPTHROUGH" },
 				{ "include": "$self" }
 			]
 		},
