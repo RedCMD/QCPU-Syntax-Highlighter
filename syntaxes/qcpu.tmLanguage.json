@@ -223,12 +223,11 @@
 			}
 		},
 		"DECLARE": {
-			"match": "(@)(DECLARE)(?>\\s+(\\w+)(?>\\s+((?>(?!//)[^\\s;])+))?)?(.*)",
+			"match": "(@)(DECLARE)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
-				"2": { "name": "keyword.control" },
-				"3": { "name": "keyword.control" },
-				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#random" }, { "include": "#invalid" } ] },
+				"3": { "patterns": [ { "include": "#string" } ] },
+				"4": { "patterns": [ { "include": "#macro" }, { "include": "#label-embed" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#assembly" }, { "include": "#string" }, { "include": "#invalid" } ] },
 				"5": { "name": "invalid" }
 			}
 		},
