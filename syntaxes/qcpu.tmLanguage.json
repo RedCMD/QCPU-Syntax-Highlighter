@@ -212,13 +212,14 @@
 			]
 		},
 		"DROPTHROUGH": {
-			"match": "(@)(DROPTHROUGH)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?(.*)",
+			"match": "(@)(DROPTHROUGH)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "keyword.control" },
 				"3": { "patterns": [ { "include": "#assembly" }, { "include": "#invalid" } ] },
 				"4": { "patterns": [ { "include": "#operand" }, { "include": "#invalid" } ] },
-				"5": { "name": "invalid" }
+				"5": { "patterns": [ { "include": "#operand" }, { "include": "#invalid" } ] },
+				"6": { "name": "invalid" }
 			}
 		},
 		"DECLARE": {
