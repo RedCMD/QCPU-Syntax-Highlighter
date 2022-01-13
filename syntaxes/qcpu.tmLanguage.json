@@ -107,57 +107,50 @@
 			"name": "variable.other.constant"
 		},
 		"OVERFLOWABLE": {
-			"match": "(@)(OVERFLOWABLE)",
-			"captures": {
-				"1": { "name": "keyword.control strong" },
-				"2": { "name": "keyword.control" }
-			}
+			"match": "@OVERFLOWABLE",
+			"name": "keyword.control strong"
 		},
 		"ADDRESSABLE": {
-			"match": "(@)(ADDRESSABLE)(?>\\s+((?>(?!//)[^\\s;.])+)(\\.(?>(?!//)[^\\s;])+)?)?(.*)",
+			"match": "(@ADDRESSABLE)(?>\\s+((?>(?!//)[^\\s;.])+)(\\.(?>(?!//)[^\\s;])+)?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
-				"2": { "name": "keyword.control" },
-				"3": { "name": "string" },
-				"4": { "patterns": [ { "include": "#label-embed" }, { "include": "#invalid" } ] },
-				"5": { "name": "invalid" }
+				"2": { "name": "string" },
+				"3": { "patterns": [ { "include": "#label-embed" }, { "include": "#invalid" } ] },
+				"4": { "name": "invalid" }
 			}
 		},
 		"PAGE": {
-			"match": "(@)(PAGE)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?(.*)",
+			"match": "(@PAGE)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
-				"2": { "name": "keyword.control" },
+				"2": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
+				"3": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
+				"4": { "name": "invalid" }
+			}
+		},
+		"MAKEPAGE": {
+			"match": "(@MAKEPAGE)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?)?(.*)",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "string" },
 				"3": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
 				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
 				"5": { "name": "invalid" }
 			}
 		},
-		"MAKEPAGE": {
-			"match": "(@)(MAKEPAGE)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?)?(.*)",
-			"captures": {
-				"1": { "name": "keyword.control strong" },
-				"2": { "name": "keyword.control" },
-				"3": { "name": "string" },
-				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
-				"5": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
-				"6": { "name": "invalid" }
-			}
-		},
 		"HEADER": {
-			"match": "(@)(HEADER)(?>\\s+([A-Z0-9]+)((?>(?!//)[^;])+)?)?",
+			"match": "(@HEADER)(?>\\s+([A-Z0-9]+)((?>(?!//)[^;])+)?)?",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
-				"2": { "name": "keyword.control" },
-				"3": { "name": "keyword.control" },
-				"4": { "patterns": [ { "include": "#HEADER-arguments" } ] }
+				"2": { "name": "string" },
+				"3": { "patterns": [ { "include": "#HEADER-arguments" } ] }
 			}
 		},
 		"HEADERS": {
-			"match": "(@)([A-Z0-9]+)((?>(?!//)[^;])+)?",
+			"match": "((@)[A-Z0-9]+)((?>(?!//)[^;])+)?",
 			"captures": {
-				"1": { "name": "keyword.control strong" },
-				"2": { "name": "keyword.control strong" },
+				"1": { "name": "keyword.control" },
+				"2": { "name": "strong" },
 				"3": { "patterns": [ { "include": "#HEADER-arguments" } ] }
 			}
 		},
@@ -169,13 +162,15 @@
 			}
 		},
 		"ENUM": {
-			"begin": "(@)(ENUM)(?>\\s+((?>(?!//)[^\\s;])+))?(.*)",
-			"end": "(@)(END)",
-			"captures": {
+			"begin": "(@ENUM)(?>\\s+((?>(?!//)[^\\s;])+))?(.*)",
+			"end": "@END",
+			"beginCaptures": {
 				"1": { "name": "keyword.control strong" },
-				"2": { "name": "keyword.control" },
-				"3": { "name": "string" },
-				"4": { "name": "invalid" }
+				"2": { "name": "string" },
+				"3": { "name": "invalid" }
+			},
+			"endCaptures": {
+				"0": { "name": "keyword.control strong" }
 			},
 			"patterns": [
 				{ "include": "#comment"	},
@@ -184,13 +179,15 @@
 			]
 		},
 		"IF": {
-			"begin": "(@)(IF)(?>\\s+((?>(?!//)[^\\s;])+))?(.*)",
-			"end": "(@)(END)",
-			"captures": {
+			"begin": "(@IF)(?>\\s+((?>(?!//)[^\\s;])+))?(.*)",
+			"end": "@END",
+			"beginCaptures": {
 				"1": { "name": "keyword.control strong" },
-				"2": { "name": "keyword.control" },
-				"3": { "name": "keyword.operator" },
-				"4": { "name": "invalid" }
+				"2": { "name": "keyword.operator" },
+				"3": { "name": "invalid" }
+			},
+			"endCaptures": {
+				"0": { "name": "keyword.control strong" }
 			},
 			"patterns": [
 				{ "include": "#DROPTHROUGH" },
@@ -199,12 +196,11 @@
 			]
 		},
 		"ELSE": {
-			"begin": "(@)(ELSE)(.*)",
+			"begin": "(@ELSE)(.*)",
 			"end": "(?=@END)",
-			"captures": {
+			"beginCaptures": {
 				"1": { "name": "keyword.control strong" },
-				"2": { "name": "keyword.control" },
-				"3": { "name": "invalid" }
+				"2": { "name": "invalid" }
 			},
 			"patterns": [
 				{ "include": "#DROPTHROUGH" },
@@ -212,30 +208,29 @@
 			]
 		},
 		"DROPTHROUGH": {
-			"match": "(@)(DROPTHROUGH)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?)?(.*)",
+			"match": "(@DROPTHROUGH)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
-				"2": { "name": "keyword.control" },
-				"3": { "patterns": [ { "include": "#assembly" }, { "include": "#invalid" } ] },
+				"2": { "patterns": [ { "include": "#assembly" }, { "include": "#invalid" } ] },
+				"3": { "patterns": [ { "include": "#operand" }, { "include": "#invalid" } ] },
 				"4": { "patterns": [ { "include": "#operand" }, { "include": "#invalid" } ] },
-				"5": { "patterns": [ { "include": "#operand" }, { "include": "#invalid" } ] },
-				"6": { "name": "invalid" }
-			}
-		},
-		"DECLARE": {
-			"match": "(@)(DECLARE)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?(.*)",
-			"captures": {
-				"1": { "name": "keyword.control strong" },
-				"3": { "patterns": [ { "include": "#string" } ] },
-				"4": { "patterns": [ { "include": "#macro" }, { "include": "#label-embed" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#assembly" }, { "include": "#string" }, { "include": "#invalid" } ] },
 				"5": { "name": "invalid" }
 			}
 		},
-		"macro": {
-			"match": "(@)([\\w.*]+)",
+		"DECLARE": {
+			"match": "(@DECLARE)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?(.*)",
 			"captures": {
-				"1": { "name": "keyword.control markup.italic" },
-				"2": { "name": "keyword.control" }
+				"1": { "name": "keyword.control strong" },
+				"2": { "patterns": [ { "include": "#string" } ] },
+				"3": { "patterns": [ { "include": "#macro" }, { "include": "#label-embed" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#assembly" }, { "include": "#string" }, { "include": "#invalid" } ] },
+				"4": { "name": "invalid" }
+			}
+		},
+		"macro": {
+			"match": "(@)[\\w.*]+",
+			"captures": {
+				"0": { "name": "keyword.control" },
+				"1": { "name": "markup.italic" }
 			}
 		},
 		"register": {
