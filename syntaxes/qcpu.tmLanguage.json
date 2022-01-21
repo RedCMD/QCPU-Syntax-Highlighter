@@ -103,7 +103,7 @@
 			}
 		},
 		"conditions": {
-			"match": "(?<!\\w)#(?>true|underflow|!?(?>cout|signed|zero))\\b",
+			"match": "\\B#!?(?>cout|signed|underflow|zero)\\b",
 			"name": "variable.other.constant"
 		},
 		"OVERFLOWABLE": {
