@@ -28,7 +28,7 @@
 		}
 	},
 	"indentationRules": {
-		"increaseIndentPattern": "^\\s*(\\.|@IF|@ELSE|@ENUM)",
-		"decreaseIndentPattern": "^\\s*(\\.|@ELSE|@END)"
+		"increaseIndentPattern": "^\\s*(\\..*:|@IF|@ELSE|@ENUM)",
+		"decreaseIndentPattern": "^\\s*(\\..*:|@ELSE|@END)"
 	}
 }
