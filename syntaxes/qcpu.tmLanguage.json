@@ -60,14 +60,14 @@
 			]
 		},
 		"ascii-string": {
-			"match": "(?<!\\w)(\\$)(\\w{2,})",
+			"match": "(?<!\\w)(\\$)([\\w ]+\\w)",
 			"captures": {
 				"1": { "name": "constant.character.escape markup.italic" },
 				"2": { "name": "string" }
 			}
 		},
 		"ascii-letter": {
-			"match": "(?<!\\w)(\\$)(\\w)",
+			"match": "(?<!\\w)(\\$)(\\w)?",
 			"captures": {
 				"1": { "name": "constant.character.escape" },
 				"2": { "name": "string" }
