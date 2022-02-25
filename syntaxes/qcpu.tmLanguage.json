@@ -27,7 +27,7 @@
 			"name": "comment"
 		},
 		"assembly": {
-			"match": "\\b(?i:NOP|PCM|PPI|PPL|CPS|CPI|CPL|CPA|CND|IMM|XCH|PPS|RST|AST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|BSL|BPL|BSR|BPR|ENT|MMU|PRF|PST|PLD|JMP|CAL|BRH|MST|MLD)\\b",
+			"match": "\\b(?i:NOP|PPI|PPL|CPI|CPL|CPA|NTA|PCM|IMM|PPS|CPS|XCH|RST|AST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|BSL|BPL|BSR|BPR|ENT|MMU|PRF|PST|PLD|JMP|CAL|BRH|MST|MLD)\\b",
 			"name": "keyword"
 		},
 		"label-address": {
