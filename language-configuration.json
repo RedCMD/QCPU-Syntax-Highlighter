@@ -30,5 +30,7 @@
 	"indentationRules": {
 		"increaseIndentPattern": "^\\s*(\\..*:|@IF|@ELSE|@ENUM)",
 		"decreaseIndentPattern": "^\\s*(\\..*:|@ELSE|@END)"
-	}
+	},
+	"wordPattern": "((?<=^\\s*)@[A-Z0-9]*|(?<!^\\s*)@[\\w.*]*)(?=$|//|;|\\s)|[\\w.*-]+"
+
 }

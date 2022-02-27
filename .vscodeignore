@@ -7,3 +7,4 @@ test files/**
 vsc-extension-quickstart.md
 .zip
 .git/**
+.vscodeignore

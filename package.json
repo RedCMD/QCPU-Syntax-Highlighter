@@ -20,6 +20,10 @@
 	"categories": [
 		"Programming Languages"
 	],
+	"activationEvents": [
+		"onLanguage:.qcpu"
+	],
+	"main": "./out/extension.js",
 	"contributes": {
 		"languages": [
 			{
