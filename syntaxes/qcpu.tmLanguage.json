@@ -28,7 +28,7 @@
 			"name": "comment"
 		},
 		"aliases": {
-			"match": "\\b(?i:NOP)\\b",
+			"match": "\\b(?i:NOP|accumulator|zero)\\b",
 			"name": "punctuation.definition.list.begin.markdown"
 		},
 		"assembly": {
