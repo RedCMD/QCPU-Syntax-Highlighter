@@ -5,6 +5,7 @@
 	"patterns": [
 		{ "include": "#comment"			},
 		{ "include": "#label-address"	},
+		{ "include": "#aliases" 		},
 		{ "include": "#assembly"		},
 		{ "include": "#random"			},
 		{ "include": "#array"			},
@@ -26,8 +27,12 @@
 			"match": "(?>//|;).*$",
 			"name": "comment"
 		},
+		"aliases": {
+			"match": "\\b(?i:NOP)\\b",
+			"name": "punctuation.definition.list.begin.markdown"
+		},
 		"assembly": {
-			"match": "\\b(?i:NOP|PPI|PPL|CPI|CPL|CPA|NTA|PCM|IMM|PPS|CPS|XCH|RST|AST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|BSL|BPL|BSR|BPR|ENT|MMU|PRF|PST|PLD|JMP|CAL|BRH|MST|MLD)\\b",
+			"match": "\\b(?i:PPI|PPL|PPK|CPI|CPL|CPA|NTA|PCM|IMM|PPS|CPS|XCH|RST|AST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|BSL|BPL|BSR|BPR|ENT|MMU|PRF|PST|PLD|JMP|CAL|BRH|MST|MLD)\\b",
 			"name": "keyword"
 		},
 		"label-address": {
