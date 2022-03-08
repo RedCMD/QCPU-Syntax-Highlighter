@@ -47,7 +47,7 @@
 			}
 		},
 		"label-embed": {
-			"match": "\\.([\\w.@]+)!?\\+?",
+			"match": "\\.([\\w.@]+)!?[+-]?",
 			"captures": {
 				"0": { "name": "support.function" },
 				"1": { "name": "support.function", "patterns": [ { "include": "#macro" } ] }
