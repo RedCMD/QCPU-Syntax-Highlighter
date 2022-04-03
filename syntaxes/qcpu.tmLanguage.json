@@ -28,8 +28,8 @@
 			"name": "comment"
 		},
 		"aliases": {
-			"match": "\\b(?i:NOP|CLR|accumulator|acc|zero?)\\b",
-			"name": "punctuation.definition.list.begin.markdown"
+			"match": "\\b(?i:FWD|CLR|NOP|accumulator|acc|zero?)\\b",
+			"name": "variable.other.constant"
 		},
 		"assembly": {
 			"match": "\\b(?i:PPI|PPL|PPK|CPI|CPL|CPA|NTA|PCM|IMM|PPS|CPS|XCH|RST|AST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|BSL|BPL|BSR|BPR|ENT|MMU|PRF|PST|PLD|JMP|CAL|BRH|MST|MLD)\\b",
