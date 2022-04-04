@@ -10,7 +10,7 @@
 		{ "include": "#random"			},
 		{ "include": "#array"			},
 		{ "include": "#ENUM"			},
-		{ "include": "#IF"		},
+		{ "include": "#IF"				},
 		{ "include": "#ADDRESSABLE"		},
 		{ "include": "#DECLARE"			},
 		{ "include": "#HEADER"			},
