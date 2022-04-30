@@ -28,7 +28,7 @@
 			"name": "comment"
 		},
 		"aliases": {
-			"match": "\\b(FWD|CLR|NOP|accumulator|acc|zero|zer|forwarded|fwd)\\b",
+			"match": "\\b(FWD|CLR|NOP|EMPTY|accumulator|acc|zero|zer|forwarded|fwd)\\b",
 			"name": "variable.other.constant"
 		},
 		"assembly": {
