@@ -15,12 +15,9 @@
 		["@IF", "@END"],
 		["@ENUM", "@END"]
 	],
-	// symbols that can be used to surround a selection
-	"surroundingPairs": [
-		["@IF", "@END"],
-		["@ENUM", "@END"]
-	],
 	"autoCloseBefore": " \n\t",
+	// symbols that can be colourized
+	"colorizedBracketPairs": [ ],
 	"folding": {
 		"markers": {
 			"start": "^\\s*(@IF|@ENUM)",
