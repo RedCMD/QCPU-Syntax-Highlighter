@@ -38,7 +38,7 @@
 		},
 		"operators": {
 			"match": "\\b(add|sub|ior|and|xor|lsh|rsh|mul|div|mod|\\+|\\-|\\||\\&|\\^)\\b",
-			"name": "punctuation.definition.tag"
+			"name": "keyword.operator"
 		},
 		"label-address": {
 			"match": "^\\s*\\.&?([\\w.@]+)(?>(\\()(\\w+)(\\))|(\\(\\)))?:",
