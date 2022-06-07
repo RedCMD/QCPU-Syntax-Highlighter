@@ -3,7 +3,7 @@
 	"displayName": "Extended QCPU Assembly Syntax Highlighter",
 	"publisher": "RedCMD",
 	"description": "Syntax Highlighting for Extended QCPU Assembly code",
-	"version": "1.9.0",
+	"version": "1.10.0",
 	"repository": {
 		"url": "https://github.com/RedCMD/Vscode-QCPU-Syntax-Highlighter"
 	},
