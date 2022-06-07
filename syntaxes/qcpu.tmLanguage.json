@@ -4,7 +4,7 @@
 	"scopeName": "source.redcmd.syntax.qcpu",
 	"patterns": [
 		{ "include": "#comment"			},
-		{ "include": "#label-address"	},
+		{ "include": "#label"			},
 		{ "include": "#aliases" 		},
 		{ "include": "#operators" 		},
 		{ "include": "#assembly"		},
@@ -40,7 +40,7 @@
 			"match": "\\b(?>add|sub|ior|and|xor|lsh|rsh|mul|div|mod)\\b|\\B[-+|&^]\\B",
 			"name": "entity.name.label"
 		},
-		"label-address": {
+		"label": {
 			"match": "^\\s*\\.&?([\\w.@]+)(?>(\\()(\\w+)(\\))|(\\(\\)))?:",
 			"captures": {
 				"0": { "name": "support.function" },
@@ -51,7 +51,7 @@
 				"5": { "name": "invalid" }
 			}
 		},
-		"label-embed": {
+		"address": {
 			"match": "\\.([\\w.@]+)!?[+-]?",
 			"captures": {
 				"0": { "name": "support.function" },
@@ -62,9 +62,9 @@
 			"patterns": [
 				{ "include": "#ascii-string"	},
 				{ "include": "#ascii-letter"	},
-				{ "include": "#label-embed"		},
 				{ "include": "#conditions"		},
 				{ "include": "#register"		},
+				{ "include": "#address"			},
 				{ "include": "#numeric"			},
 				{ "include": "#macro"			}
 			]
@@ -129,7 +129,7 @@
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "string" },
-				"3": { "patterns": [ { "include": "#label-embed" }, { "include": "#invalid" } ] },
+				"3": { "patterns": [ { "include": "#address" }, { "include": "#invalid" } ] },
 				"4": { "name": "invalid" }
 			}
 		},
@@ -171,7 +171,7 @@
 		"HEADER-arguments": {
 			"match": "(?>\\s+((?>(?!//)[^\\s;])+))((?>(?!//)[^;])+)?",
 			"captures": {
-				"1": { "patterns": [ { "include": "#macro" }, { "include": "#label-embed" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#assembly" }, { "include": "#string" } ], "name": "string" },
+				"1": { "patterns": [ { "include": "#macro" }, { "include": "#address" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#assembly" }, { "include": "#string" } ], "name": "string" },
 				"2": { "patterns": [ { "include": "#HEADER-arguments" } ] }
 			}
 		},
@@ -236,12 +236,12 @@
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "patterns": [ { "include": "#string" } ] },
-				"3": { "patterns": [ { "include": "#macro" }, { "include": "#label-embed" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#assembly" }, { "include": "#string" }, { "include": "#invalid" } ] },
+				"3": { "patterns": [ { "include": "#macro" }, { "include": "#address" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#assembly" }, { "include": "#string" }, { "include": "#invalid" } ] },
 				"4": { "name": "invalid" }
 			}
 		},
 		"macro": {
-			"match": "(@)[\\w.*]+",
+			"match": "(@)[\\w.]+",
 			"captures": {
 				"0": { "name": "keyword.control" },
 				"1": { "name": "markup.italic" }
