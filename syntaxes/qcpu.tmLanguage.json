@@ -6,8 +6,8 @@
 		{ "include": "#comment"			},
 		{ "include": "#label-address"	},
 		{ "include": "#aliases" 		},
-		{ "include": "#assembly"		},
 		{ "include": "#operators" 		},
+		{ "include": "#assembly"		},
 		{ "include": "#random"			},
 		{ "include": "#array"			},
 		{ "include": "#ENUM"			},
@@ -37,8 +37,8 @@
 			"name": "keyword"
 		},
 		"operators": {
-			"match": "\\b(add|sub|ior|and|xor|lsh|rsh|mul|div|mod|\\+|\\-|\\||\\&|\\^)\\b",
-			"name": "keyword.operator"
+			"match": "\\b(?>add|sub|ior|and|xor|lsh|rsh|mul|div|mod)\\b|\\B[-+|&^]\\B",
+			"name": "entity.name.label"
 		},
 		"label-address": {
 			"match": "^\\s*\\.&?([\\w.@]+)(?>(\\()(\\w+)(\\))|(\\(\\)))?:",
