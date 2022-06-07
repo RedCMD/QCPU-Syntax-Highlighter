@@ -8,6 +8,7 @@
 		{ "include": "#aliases" 		},
 		{ "include": "#operators" 		},
 		{ "include": "#assembly"		},
+		{ "include": "#assembly?"		},
 		{ "include": "#random"			},
 		{ "include": "#array"			},
 		{ "include": "#ENUM"			},
@@ -35,6 +36,10 @@
 		"assembly": {
 			"match": "\\b(?i:PPI|PPL|PPK|CPI|CPL|CPA|NTA|PCM|IMM|PPS|CPS|XCH|RST|AST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|BSL|BPL|BSR|BPR|ENT|MMU|PRF|PRT|JMP|CAL|BRH|MST|MLD|MLI)\\b",
 			"name": "keyword"
+		},
+		"assembly?": {
+			"match": "(?<=^\\s*)[A-Z]+\\b",
+			"name": "keyword emphasis"
 		},
 		"operators": {
 			"match": "\\b(?>add|sub|ior|and|xor|lsh|rsh|mul|div|mod)\\b|\\B[-+|&^]\\B",
