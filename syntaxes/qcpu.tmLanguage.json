@@ -10,7 +10,8 @@
 		{ "include": "#assembly"		},
 		{ "include": "#assembly?"		},
 		{ "include": "#random"			},
-		{ "include": "#array"			},
+		{ "include": "#%array"			},
+		{ "include": "#%function"		},
 		{ "include": "#ENUM"			},
 		{ "include": "#IF"				},
 		{ "include": "#ADDRESSABLE"		},
@@ -115,12 +116,13 @@
 				"2": { "name": "constant.numeric.random" }
 			}
 		},
-		"array": {
+		"%array": {
 			"match": "%array\\b",
-			"captures": {
-				"0": { "name": "support.class" },
-				"1": { "name": "strong" }
-			}
+			"name": "support.class"
+		},
+		"%function": {
+			"match": "%[a-zA-Z0-9_.]+",
+			"name": "support.class emphasis"
 		},
 		"condition": {
 			"match": "\\B#!?(?>cout|signed|underflow|zero)\\b",
