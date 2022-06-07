@@ -7,6 +7,7 @@
 		{ "include": "#label-address"	},
 		{ "include": "#aliases" 		},
 		{ "include": "#assembly"		},
+		{ "include": "#operators" 		},
 		{ "include": "#random"			},
 		{ "include": "#array"			},
 		{ "include": "#ENUM"			},
@@ -28,12 +29,16 @@
 			"name": "comment"
 		},
 		"aliases": {
-			"match": "\\b(FWD|CLR|NOP|EMPTY|accumulator|acc|zero|zer|forwarded|fwd)\\b",
+			"match": "\\b(FWD|CLR|NOP|EMPTY|BREAKPOINT|accumulator|acc|zero|zer|forwarded|fwd)\\b",
 			"name": "variable.other.constant"
 		},
 		"assembly": {
 			"match": "\\b(?i:PPI|PPL|PPK|CPI|CPL|CPA|NTA|PCM|IMM|PPS|CPS|XCH|RST|AST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|BSL|BPL|BSR|BPR|ENT|MMU|PRF|PRT|JMP|CAL|BRH|MST|MLD|MLI)\\b",
 			"name": "keyword"
+		},
+		"operators": {
+			"match": "\\b(add|sub|ior|and|xor|lsh|rsh|mul|div|mod|\\+|\\-|\\||\\&|\\^)\\b",
+			"name": "keyword.operator"
 		},
 		"label-address": {
 			"match": "^\\s*\\.&?([\\w.@]+)(?>(\\()(\\w+)(\\))|(\\(\\)))?:",
