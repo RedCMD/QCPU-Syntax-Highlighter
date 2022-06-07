@@ -77,7 +77,7 @@
 			}
 		},
 		"ascii-letter": {
-			"match": "(?<!\\w)(\\$)(\\w)?",
+			"match": "(?<!\\w)(\\$)(\\S)?",
 			"captures": {
 				"1": { "name": "constant.character.escape" },
 				"2": { "name": "string" }
