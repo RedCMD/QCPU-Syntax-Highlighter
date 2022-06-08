@@ -248,7 +248,7 @@
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "patterns": [ { "include": "#string" } ] },
-				"3": { "patterns": [ { "include": "#macro" }, { "include": "#address" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#assembly" }, { "include": "#string" }, { "include": "#invalid" } ] },
+				"3": { "patterns": [ { "include": "#macro" }, { "include": "#address" }, { "include": "#ascii-string" }, { "include": "#ascii-letter" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#assembly" }, { "include": "#string" }, { "include": "#invalid" } ] },
 				"4": { "name": "invalid" }
 			}
 		},
