@@ -587,8 +587,8 @@ function tokenizeDoc(document) {
 		/(?<tag>(?<=^)@[A-Z]*(?!\w))/,
 		/(?<header>(?<=^\s*)@[A-Z0-9]*(?!\w))/,
 		/(?<macro>@[\w.*]*)/,
-		// /(?<=^\s*)(?<label_define>\.&?([\w.@]+)(?>(\()(\w+)(\))|(\(\)))?:)/,
-		// /(?<label>\.([\w.@]+)!?\+?)/,
+		/(?<=^\s*)(?<label_define>\.&?[\w.@]+)/,
+		/(?<label>\.[\w.@]+)/,
 		// /(?<=^\s*)(?<define>@DEFINE)/,
 		// /(?<macro>@\w*)/,
 		// /(?<register>CXT|POI|SPI|[A-D]|Zr)/,
@@ -643,22 +643,22 @@ function getTokenAtPostion(position, tokens) {
 	return tokens.find(token => token.range.contains(position))
 }
 
-// function getLabels(document, option) {
-// 	const tokens = tokenizeDoc(document)
-// 	let labels = []
-// 	let token
-	
-// 	// option:0 all .labels
-// 	// option:1 only reference .labels
-// 	// option:2 only definition .labels
-// 	while (token = tokens.pop())
-// 		if ((option ^ 2 && token.name == 'label') || (option ^ 1 && token.name == 'label_define'))
-// 			labels.push({ document: document, range: token.range, symbol: token.symbol })
+function getLabels(document, option) {
+	const tokens = tokenizeDoc(document)
+	let labels = []
+	let token
+
+	// option:0 all .labels
+	// option:1 only reference .labels
+	// option:2 only definition .labels
+	while (token = tokens.pop())
+		if ((option ^ 2 && token.name == 'label') || (option ^ 1 && token.name == 'label_define'))
+			labels.push({ document: document, range: token.range, symbol: token.symbol })
 
 
-// 	// vscode.window.showInformationMessage(JSON.stringify(labels))
-// 	return labels
-// }
+	// vscode.window.showInformationMessage(JSON.stringify(labels))
+	return labels
+}
 
 function getHeaders(document, option) {
 	const tokens = tokenizeDoc(document)
@@ -795,57 +795,57 @@ function getHeaders(document, option) {
 // 	}
 // }
 
-// const CodelensProvider = {
-// 	provideCodeLenses(document, token) {
-// 		const labels = getLabels(document, 2)
-// 		// vscode.window.showInformationMessage(JSON.stringify(labels))
-// 		return labels
+const CodelensProvider = {
+	provideCodeLenses(document, token) {
+		const labels = getLabels(document, 2)
+		// vscode.window.showInformationMessage(JSON.stringify(labels))
+		return labels
 
-// 		// tokenizeDoc(document)
+		// tokenizeDoc(document)
 
-// 	},
-// 	resolveCodeLens(codeLens, token) {
-// 		const document = codeLens.document
-// 		const position = codeLens.range.start
-// 		const symbol = codeLens.symbol
-// 		let labels = getLabels(document, 1)
-// 		let label
-// 		let locations = []
-// 		let i = 0
+	},
+	resolveCodeLens(codeLens, token) {
+		const document = codeLens.document
+		const position = codeLens.range.start
+		const symbol = codeLens.symbol
+		let labels = getLabels(document, 1)
+		let label
+		let locations = []
+		let i = 0
 
-// 		while (label = labels.pop()) {
-// 			if (label.symbol == symbol) {
-// 				const location = new vscode.Location(document.uri, label.range)
-// 				locations.push(location)
-// 				i++
-// 			}
-// 		}
-// 		// if (i == 0) {
-// 		// 	while (label = codeLens.pop()) {
-// 		// 		if (label.symbol == symbol) {
-// 		// 			const location = new vscode.Location(document.uri, label.range)
-// 		// 			locations.push(location)
-// 		// 			i++
-// 		// 		}
-// 		// 	}
-// 		// 	if (i == 1)
-// 		// 		locations.pop()
-// 		// }
-		
-// 		codeLens.command = {
-// 			title: `Refs: ${i}`,
-// 			tooltip: `${codeLens.symbol}`,
-// 			command: 'editor.action.showReferences',
-// 			arguments: [
-// 				document.uri,
-// 				position,
-// 				locations
-// 			]
-// 		}
-// 		codeLens.isResolved = true
-// 		return codeLens
-// 	}
-// }
+		while (label = labels.pop()) {
+			if (label.symbol == symbol) {
+				const location = new vscode.Location(document.uri, label.range)
+				locations.push(location)
+				i++
+			}
+		}
+		// if (i == 0) {
+		// 	while (label = codeLens.pop()) {
+		// 		if (label.symbol == symbol) {
+		// 			const location = new vscode.Location(document.uri, label.range)
+		// 			locations.push(location)
+		// 			i++
+		// 		}
+		// 	}
+		// 	if (i == 1)
+		// 		locations.pop()
+		// }
+
+		codeLens.command = {
+			title: `Refs: ${i}`,
+			tooltip: `${codeLens.symbol}`,
+			command: 'editor.action.showReferences',
+			arguments: [
+				document.uri,
+				position,
+				locations
+			]
+		}
+		codeLens.isResolved = true
+		return codeLens
+	}
+}
 
 
 // const ReferenceProvider = {
@@ -1281,7 +1281,7 @@ const fileSelector = [
 function activate(context) {
 	// context.subscriptions.push(vscode.languages.registerHoverProvider(fileSelector, HoverProvider)); // Hovers
 	// context.subscriptions.push(vscode.languages.registerRenameProvider(fileSelector, RenameProvider)); // rename related symbols
-	// context.subscriptions.push(vscode.languages.registerCodeLensProvider(fileSelector, CodelensProvider)); // overhead .label references
+	context.subscriptions.push(vscode.languages.registerCodeLensProvider(fileSelector, CodelensProvider)); // overhead .label references
 	// context.subscriptions.push(vscode.languages.registerReferenceProvider(fileSelector, ReferenceProvider)); // shift+F12 .label locations
 	// context.subscriptions.push(vscode.languages.registerDefinitionProvider(fileSelector, DefinitionProvider)); // ctrl+click .label definition(s)
 	// context.subscriptions.push(vscode.languages.registerSignatureHelpProvider(fileSelector, SignatureHelpProvider, [' '])); // hover instruction definition
