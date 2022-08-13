@@ -872,46 +872,46 @@ const CodelensProvider = {
 // }
 
 
-// const DefinitionProvider = {
-// 	provideDefinition(document, position, token) {
-// 		const range = document.getWordRangeAtPosition(position)	//`Word` is defined by "wordPattern" in `urcl.language-configuration.json`
-// 		const hoveredWord = document.getText(range)
-// 		const regexlabel = new RegExp(/^\.\w+$/m) // .label
-		
-// 		if (regexlabel.test(hoveredWord)) {	// test if selected word is a .label
-// 			let labels = getLabels(document, 2)	// get a list of all label_defines in doc
-// 			let label
-// 			let locations = []
-			
-// 			while (label = labels.pop())
-// 				if (hoveredWord == label.symbol)	// test if .label in doc is same as selected .label
-// 					if (!range.isEqual(label.range)) {
-// 						// vscode.window.showInformationMessage(JSON.stringify(range))
-// 						// vscode.window.showInformationMessage(JSON.stringify(label.range))
-// 						locations.push(new vscode.Location(document.uri, label.range))
-// 					}
-			
-			
-// 			if (locations.length == 0) {
-// 				labels = getLabels(document, 1)	// get a list of all labels in doc
-// 				vscode.window.showInformationMessage(JSON.stringify(labels))
-// 				while (label = labels.pop())
-// 					if (hoveredWord == label.symbol)	// test if .label in doc is same as selected .label
-// 						locations.push(new vscode.Location(document.uri, label.range))
-// 			}
-				
+const DefinitionProvider = {
+	provideDefinition(document, position, token) {
+		const range = document.getWordRangeAtPosition(position)	//`Word` is defined by "wordPattern" in `urcl.language-configuration.json`
+		const hoveredWord = document.getText(range)
+		const regexlabel = new RegExp(/^\.&?[\w.@]+$/) // .label
 
-// 			if (locations.length == 0) {
-// 				locations.push(new vscode.Location(document.uri, range))
-// 				// vscode.window.showInformationMessage(JSON.stringify(labels))
-// 			}
+		if (regexlabel.test(hoveredWord)) {	// test if selected word is a .label
+			// vscode.window.showInformationMessage(JSON.stringify(hoveredWord))
+			let labels = getLabels(document, 2)	// get a list of all label_defines in doc
+			let label
+			let locations = []
 
-// 			vscode.window.showInformationMessage(JSON.stringify(locations))
-// 			vscode.window.showInformationMessage(locations)
-// 			return locations;
-// 		}
-// 	}
-// }
+			while (label = labels.pop())
+				if (hoveredWord == label.symbol)	// test if .label in doc is same as selected .label
+					if (!range.isEqual(label.range)) {
+						// vscode.window.showInformationMessage(JSON.stringify(range))
+						// vscode.window.showInformationMessage(JSON.stringify(label.range))
+						locations.push(new vscode.Location(document.uri, label.range))
+					}
+
+
+			if (locations.length == 0) {
+				labels = getLabels(document, 1)	// get a list of all labels in doc
+				// vscode.window.showInformationMessage(JSON.stringify(labels))
+				while (label = labels.pop())
+					if (hoveredWord == label.symbol)	// test if .label in doc is same as selected .label
+						locations.push(new vscode.Location(document.uri, label.range))
+			}
+
+
+			if (locations.length == 0) {
+				locations.push(new vscode.Location(document.uri, range))
+				// vscode.window.showInformationMessage(JSON.stringify(labels))
+			}
+
+			// vscode.window.showInformationMessage(JSON.stringify(locations))
+			return locations;
+		}
+	}
+}
 
 
 // const decorationType = vscode.window.createTextEditorDecorationType({
@@ -1283,7 +1283,7 @@ function activate(context) {
 	// context.subscriptions.push(vscode.languages.registerRenameProvider(fileSelector, RenameProvider)); // rename related symbols
 	context.subscriptions.push(vscode.languages.registerCodeLensProvider(fileSelector, CodelensProvider)); // overhead .label references
 	// context.subscriptions.push(vscode.languages.registerReferenceProvider(fileSelector, ReferenceProvider)); // shift+F12 .label locations
-	// context.subscriptions.push(vscode.languages.registerDefinitionProvider(fileSelector, DefinitionProvider)); // ctrl+click .label definition(s)
+	context.subscriptions.push(vscode.languages.registerDefinitionProvider(fileSelector, DefinitionProvider)); // ctrl+click .label definition(s)
 	// context.subscriptions.push(vscode.languages.registerSignatureHelpProvider(fileSelector, SignatureHelpProvider, [' '])); // hover instruction definition
 	context.subscriptions.push(vscode.languages.registerCompletionItemProvider(fileSelector, CompletionItemProvider)); // intellisense
 	// context.subscriptions.push(vscode.languages.registerDocumentSymbolProvider(fileSelector, DocumentSymbolProvider)); // breadcrumbs
