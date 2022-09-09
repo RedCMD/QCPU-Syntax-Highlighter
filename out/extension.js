@@ -833,7 +833,7 @@ const CodelensProvider = {
 		// }
 
 		codeLens.command = {
-			title: `${i} Reference${i == 1 ? '' : 's'}`,
+			title: `${i} reference${i == 1 ? '' : 's'}`,
 			tooltip: `${codeLens.symbol}`,
 			command: 'editor.action.showReferences',
 			arguments: [
