@@ -807,7 +807,7 @@ const CodelensProvider = {
 	resolveCodeLens(codeLens, token) {
 		const document = codeLens.document
 		const position = codeLens.range.start
-		const symbol = codeLens.symbol
+		const symbol = codeLens.symbol.replace('&', '')
 		let labels = getLabels(document, 1)
 		let label
 		let locations = []
