@@ -21,7 +21,8 @@
 		"Programming Languages"
 	],
 	"activationEvents": [
-		"onLanguage:qcpu"
+		"onLanguage:qcpu2c",
+		"onLanguage:qcpu2ci"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
