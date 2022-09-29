@@ -1,0 +1,170 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "QCPU 2CI Syntax",
+	"scopeName": "source.qcpu2ci",
+	"patterns": [
+		{ "include": "source.qcpu2c#comment" },
+		{ "include": "source.qcpu2c#label" },
+		{ "include": "source.qcpu2c#aliases" },
+		{ "include": "source.qcpu2c#operators" },
+		{ "include": "#assembly" },
+		{ "include": "source.qcpu2c#assembly?" },
+		{ "include": "source.qcpu2c#random" },
+		{ "include": "source.qcpu2c#%array" },
+		{ "include": "source.qcpu2c#%function" },
+		{ "include": "#SEGMENT" },
+		{ "include": "#ADDRESSABLE" },
+		{ "include": "#HEADER" },
+		{ "include": "#ENUM" },
+		{ "include": "#INCLUDE" },
+		{ "include": "#ASSOCIATED" },
+		{ "include": "#DECLARE" },
+		{ "include": "#HEADERS" },
+		{ "include": "#operand" },
+		{ "include": "source.qcpu2c#comma" },
+		{ "include": "source.qcpu2c#invalid" }
+	],
+	"repository": {
+		"assembly": {
+			"match": "\\b(?i:MSC|DPS|IMM|PRT|XCH|AST|RST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|BSL|BPL|BSR|BPR|ENT|PHA|PRF|BRH|JMP|CAL|MST|MLD|MLI|DPI|DPL|DPK|RET|NTA|PCM|DPI|DPL|DPK|RET|NTA|PCM)\\b",
+			"name": "keyword"
+		},
+		"address": {
+			"match": "\\.(?>(\\()([\\w.@]*)(\\))?)?([\\w.@]+)!?\\+?",
+			"captures": {
+				"0": { "name": "support.function" },
+				"1": { "name": "keyword.operator" },
+				"2": {
+					"name": "support.function",
+					"patterns": [
+						{ "include": "source.qcpu2c#macro" }
+					]
+				},
+				"3": { "name": "keyword.operator" },
+				"4": {
+					"name": "support.function",
+					"patterns": [ { "include": "source.qcpu2c#macro" } ]
+				}
+			}
+		},
+		"operand": {
+			"patterns": [
+				{ "include": "#ascii-string" },
+				{ "include": "source.qcpu2c#ascii-letter" },
+				{ "include": "source.qcpu2c#condition" },
+				{ "include": "source.qcpu2c#condition?" },
+				{ "include": "source.qcpu2c#register" },
+				{ "include": "#address" },
+				{ "include": "source.qcpu2c#numeric" },
+				{ "include": "source.qcpu2c#macro" }
+			]
+		},
+		"ascii-string": {
+			"begin": "\"",
+			"end": "\"",
+			"name": "string",
+			"patterns": [
+				{
+					"match": "\\\\.",
+					"name": "constant.character.escape"
+				}
+			]
+		},
+		"SEGMENT": {
+			"match": "(#SEGMENT\\b)(?>\\s+((?>(?!//)[^\\s;])*))?",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "patterns": [ { "include": "source.qcpu2c#numeric" } ] }
+			}
+		},
+		"ADDRESSABLE": {
+			"match": "(#ADDRESSABLE\\b)(?>\\s+((?>(?!//)[^\\s;.])+)(\\.(?>(?!//)[^\\s;])+)?)?(.*)",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "string" },
+				"3": {
+					"patterns": [
+						{ "include": "#address" },
+						{ "include": "source.qcpu2c#invalid" }
+					]
+				},
+				"4": { "name": "invalid" }
+			}
+		},
+		"HEADER": {
+			"match": "(#HEADER\\b)(?>\\s+([A-Z0-9]+)((?>(?!//)[^;])+)?)?",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "string" },
+				"3": { "patterns": [ { "include": "#HEADER-arguments" } ] }
+			}
+		},
+		"HEADER-arguments": {
+			"match": "(?>\\s+((?>(?!//)[^\\s;])+))((?>(?!//)[^;])+)?",
+			"captures": {
+				"1": {
+					"patterns": [
+						{ "include": "source.qcpu2c#macro" },
+						{ "include": "#address" },
+						{ "include": "source.qcpu2c#numeric" },
+						{ "include": "source.qcpu2c#random" },
+						{ "include": "#assembly" },
+						{ "include": "source.qcpu2c#string" }
+					],
+					"name": "string"
+				},
+				"2": { "patterns": [ { "include": "#HEADER-arguments" } ] }
+			}
+		},
+		"ENUM": {
+			"begin": "(#ENUM\\b)(?>\\s+((?>(?!//)[^\\s;])+))?(.*)",
+			"end": "#END\\b",
+			"beginCaptures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "string" },
+				"3": { "name": "invalid" }
+			},
+			"endCaptures": { "0": { "name": "keyword.control strong" } },
+			"patterns": [
+				{ "include": "source.qcpu2c#comment" },
+				{ "include": "#DECLARE" },
+				{ "include": "source.qcpu2c#invalid" }
+			]
+		},
+		"INCLUDE": {
+			"match": "(#INCLUDE\\b)(?>\\s+((?>(?!//)[^\\s;])*))?",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "string" }
+			}
+		},
+		"ASSOCIATED": {
+			"match": "(#ASSOCIATED\\b)(?>\\s+((?>(?!//)[^\\s;])*))?",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "string" }
+			}
+		},
+		"DECLARE": {
+			"match": "(#DECLARE\\b)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?(.*)",
+			"captures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "patterns": [ { "include": "source.qcpu2c#string" } ] },
+				"3": {
+					"patterns": [
+						{ "include": "source.qcpu2c#macro" },
+						{ "include": "#address" },
+						{ "include": "#ascii-string" },
+						{ "include": "source.qcpu2c#ascii-letter" },
+						{ "include": "source.qcpu2c#numeric" },
+						{ "include": "source.qcpu2c#random" },
+						{ "include": "#assembly" },
+						{ "include": "source.qcpu2c#string" },
+						{ "include": "source.qcpu2c#invalid" }
+					]
+				},
+				"4": { "name": "invalid" }
+			}
+		}
+	}
+}

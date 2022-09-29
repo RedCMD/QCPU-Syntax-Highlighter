@@ -12,26 +12,39 @@
 		"vscode": "^1.47.0"
 	},
 	"keywords": [
+		"qcpu 2ci",
 		"qcpu",
 		"qos",
-		"qsmally",
-		"theredcmd"
+		"qsmally"
 	],
 	"categories": [
 		"Programming Languages"
 	],
 	"activationEvents": [
-		"onLanguage:.qcpu"
+		"onLanguage:qcpu"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"languages": [
 			{
-				"id": ".qcpu",
+				"id": "qcpu2c",
 				"aliases": [
-					"RedCMD.QCPU"
+					"QCPU 2C"
 				],
 				"extensions": [
+					".qcpu2c",
+					".qcpu",
+					".s"
+				],
+				"configuration": "./language-configuration.json"
+			},
+			{
+				"id": "qcpu2ci",
+				"aliases": [
+					"QCPU 2CI"
+				],
+				"extensions": [
+					".qcpu2ci",
 					".qcpu",
 					".s"
 				],
@@ -40,9 +53,14 @@
 		],
 		"grammars": [
 			{
-				"language": ".qcpu",
-				"scopeName": "source.redcmd.syntax.qcpu",
-				"path": "./syntaxes/qcpu.tmLanguage.json"
+				"language": "qcpu2c",
+				"scopeName": "source.qcpu2c",
+				"path": "./syntaxes/qcpu2c.tmLanguage.json"
+			},
+			{
+				"language": "qcpu2ci",
+				"scopeName": "source.qcpu2ci",
+				"path": "./syntaxes/qcpu2ci.tmLanguage.json"
 			}
 		]
 	},

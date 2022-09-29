@@ -1274,6 +1274,8 @@ const CompletionItemProvider = {
 
 
 const fileSelector = [
+	{ language: 'qcpu2c' },
+	{ language: 'qcpu2ci' },
 	{ scheme: 'file', language:	'qcpu'	},
 	{ scheme: 'file', language:	'.qcpu'	}
 ];
