@@ -26,7 +26,7 @@
 	],
 	"repository": {
 		"assembly": {
-			"match": "\\b(?i:DPI|DPL|DKP|RET|NTA|PCM|DPS|PRF|IMM|XCH|AST|RST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|BSL|BPL|BSR|BPR|ENT|DMA|PRT|BRH|JMP|MST|MLD|CLR|FWD|LCK|ULK|NOP)(?i:\\([A-Z]\\))?\\b",
+			"match": "\\b(?i:DPI|DPL|DKP|RET|NTA|PCM|DPS|PRF|IMM|XCH|AST|RST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|BSL|BPL|BSR|BPR|ENT|DMA|PRT|BRH|JMP|MST|MLD|CLR|FWD|LCK|ULK|NOP)\\b(?i:\\([A-Z]\\))?",
 			"name": "keyword"
 		},
 		"address": {
