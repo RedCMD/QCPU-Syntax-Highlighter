@@ -5,10 +5,9 @@
 	"patterns": [
 		{ "include": "source.qcpu2c#comment" },
 		{ "include": "source.qcpu2c#label" },
-		{ "include": "source.qcpu2c#aliases" },
+		{ "include": "#aliases" },
 		{ "include": "source.qcpu2c#operators" },
 		{ "include": "#assembly" },
-		{ "include": "source.qcpu2c#assembly?" },
 		{ "include": "source.qcpu2c#random" },
 		{ "include": "source.qcpu2c#%array" },
 		{ "include": "source.qcpu2c#%function" },
@@ -26,9 +25,13 @@
 	],
 	"repository": {
 		"assembly": {
-			"match": "\\b(?i:DPI|DPL|DKP|RET|NTA|PCM|DPS|PRF|IMM|XCH|AST|RST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|BSL|BPL|BSR|BPR|ENT|DMA|PRT|BRH|JMP|MST|MLD|CLR|FWD|LCK|ULK|NOP)\\b(?i:\\([A-Z]\\))?",
+			"match": "\\b(?i:DPI|DPL|DKP|RET|NTA|PCM|DPS|PRF|IMM|XCH|AST|RST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|BSL|BPL|BSR|BPR|ENT|DMA|PRT|BRH|JMP|MST|MLD)\\b(?i:\\([A-Z]\\))?",
 			"name": "keyword"
 		},
+        "aliases": {
+            "match": "\\b(?i:FWD|CLR|LCK|ULK|EMPTY|BREAKPOINT|accumulator|acc|zero|zer|forwarded|fwd)\\b",
+            "name": "variable.other.constant"
+        },
 		"address": {
 			"match": "\\.(?>(\\()([\\w.@]*)(\\))?)?([\\w.@]+)!?\\+?",
 			"captures": {
