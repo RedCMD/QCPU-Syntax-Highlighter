@@ -3,27 +3,27 @@
 	"name": "QCPU 2C Syntax",
 	"scopeName": "source.qcpu2c",
 	"patterns": [
-		{ "include": "#comment"			},
-		{ "include": "#label"			},
-		{ "include": "#aliases" 		},
-		{ "include": "#operators" 		},
-		{ "include": "#assembly"		},
-		{ "include": "#assembly?"		},
-		{ "include": "#random"			},
-		{ "include": "#%array"			},
-		{ "include": "#%function"		},
-		{ "include": "#ENUM"			},
-		{ "include": "#IF"				},
-		{ "include": "#ADDRESSABLE"		},
-		{ "include": "#DECLARE"			},
-		{ "include": "#HEADER"			},
-		{ "include": "#PAGE"			},
-		{ "include": "#MAKEPAGE"		},
-		{ "include": "#OVERFLOWABLE"	},
-		{ "include": "#HEADERS"			},
-		{ "include": "#operand"			},
-		{ "include": "#comma"			},
-		{ "include": "#invalid"			}
+		{ "include": "#comment" },
+		{ "include": "#label" },
+		{ "include": "#aliases" },
+		{ "include": "#operators" },
+		{ "include": "#assembly" },
+		{ "include": "#assembly_unknown" },
+		{ "include": "#random" },
+		{ "include": "#%array" },
+		{ "include": "#%function" },
+		{ "include": "#ENUM" },
+		{ "include": "#IF" },
+		{ "include": "#ADDRESSABLE" },
+		{ "include": "#DECLARE" },
+		{ "include": "#HEADER" },
+		{ "include": "#PAGE" },
+		{ "include": "#MAKEPAGE" },
+		{ "include": "#OVERFLOWABLE" },
+		{ "include": "#HEADERS" },
+		{ "include": "#operand" },
+		{ "include": "#comma" },
+		{ "include": "#invalid" }
 	],
 	"repository": {
 		"comment": {
@@ -38,7 +38,7 @@
 			"match": "\\b(?i:PPI|PPL|PPK|CPI|CPL|CPA|NTA|PCM|IMM|PPS|CPS|XCH|RST|AST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|BSL|BPL|BSR|BPR|ENT|MMU|PRF|PRT|JMP|CAL|BRH|MST|MLD|MLI)\\b",
 			"name": "keyword"
 		},
-		"assembly?": {
+		"assembly_unknown": {
 			"match": "(?<=^\\s*)[A-Z]+\\b",
 			"name": "keyword emphasis"
 		},
@@ -50,9 +50,17 @@
 			"match": "^\\s*\\.&?([\\w.@]+)(?>(\\()(\\w+)(\\))|(\\(\\)))?:",
 			"captures": {
 				"0": { "name": "support.function" },
-				"1": { "name": "support.function", "patterns": [ { "include": "#macro" } ] },
+				"1": {
+					"name": "support.function",
+					"patterns": [ { "include": "#macro" } ]
+				},
 				"2": { "name": "keyword.operator" },
-				"3": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid-illegal" } ] },
+				"3": {
+					"patterns": [
+						{ "include": "#numeric" },
+						{ "include": "#invalid-illegal" }
+					]
+				},
 				"4": { "name": "keyword.operator" },
 				"5": { "name": "invalid" }
 			}
@@ -61,19 +69,22 @@
 			"match": "\\.([\\w.@]+)!?[+-]?",
 			"captures": {
 				"0": { "name": "support.function" },
-				"1": { "name": "support.function", "patterns": [ { "include": "#macro" } ] }
+				"1": {
+					"name": "support.function",
+					"patterns": [ { "include": "#macro" } ]
+				}
 			}
 		},
 		"operand": {
 			"patterns": [
-				{ "include": "#ascii-string"	},
-				{ "include": "#ascii-letter"	},
-				{ "include": "#condition"		},
-				{ "include": "#condition?"		},
-				{ "include": "#register"		},
-				{ "include": "#address"			},
-				{ "include": "#numeric"			},
-				{ "include": "#macro"			}
+				{ "include": "#ascii-string" },
+				{ "include": "#ascii-letter" },
+				{ "include": "#condition" },
+				{ "include": "#condition?" },
+				{ "include": "#register" },
+				{ "include": "#address" },
+				{ "include": "#numeric" },
+				{ "include": "#macro" }
 			]
 		},
 		"ascii-string": {
@@ -92,9 +103,9 @@
 		},
 		"numeric": {
 			"patterns": [
-				{ "include": "#hexadecimal"	},
-				{ "include": "#binary"		},
-				{ "include": "#decimal"		}
+				{ "include": "#hexadecimal" },
+				{ "include": "#binary" },
+				{ "include": "#decimal" }
 			]
 		},
 		"hexadecimal": {
@@ -141,7 +152,12 @@
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "string" },
-				"3": { "patterns": [ { "include": "#address" }, { "include": "#invalid" } ] },
+				"3": {
+					"patterns": [
+						{ "include": "#address" },
+						{ "include": "#invalid" }
+					]
+				},
 				"4": { "name": "invalid" }
 			}
 		},
@@ -149,8 +165,18 @@
 			"match": "(@PAGE\\b)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
-				"2": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
-				"3": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
+				"2": {
+					"patterns": [
+						{ "include": "#numeric" },
+						{ "include": "#invalid" }
+					]
+				},
+				"3": {
+					"patterns": [
+						{ "include": "#numeric" },
+						{ "include": "#invalid" }
+					]
+				},
 				"4": { "name": "invalid" }
 			}
 		},
@@ -159,8 +185,18 @@
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "name": "string" },
-				"3": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
-				"4": { "patterns": [ { "include": "#numeric" }, { "include": "#invalid" } ] },
+				"3": {
+					"patterns": [
+						{ "include": "#numeric" },
+						{ "include": "#invalid" }
+					]
+				},
+				"4": {
+					"patterns": [
+						{ "include": "#numeric" },
+						{ "include": "#invalid" }
+					]
+				},
 				"5": { "name": "invalid" }
 			}
 		},
@@ -183,7 +219,17 @@
 		"HEADER-arguments": {
 			"match": "(?>\\s+((?>(?!//)[^\\s;])+))((?>(?!//)[^;])+)?",
 			"captures": {
-				"1": { "patterns": [ { "include": "#macro" }, { "include": "#address" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#assembly" }, { "include": "#string" } ], "name": "string" },
+				"1": {
+					"patterns": [
+						{ "include": "#macro" },
+						{ "include": "#address" },
+						{ "include": "#numeric" },
+						{ "include": "#random" },
+						{ "include": "#assembly" },
+						{ "include": "#string" }
+					],
+					"name": "string"
+				},
 				"2": { "patterns": [ { "include": "#HEADER-arguments" } ] }
 			}
 		},
@@ -195,13 +241,11 @@
 				"2": { "name": "string" },
 				"3": { "name": "invalid" }
 			},
-			"endCaptures": {
-				"0": { "name": "keyword.control strong" }
-			},
+			"endCaptures": { "0": { "name": "keyword.control strong" } },
 			"patterns": [
-				{ "include": "#comment"	},
-				{ "include": "#DECLARE"	},
-				{ "include": "#invalid"	}
+				{ "include": "#comment" },
+				{ "include": "#DECLARE" },
+				{ "include": "#invalid" }
 			]
 		},
 		"IF": {
@@ -212,9 +256,7 @@
 				"2": { "name": "keyword.operator" },
 				"3": { "name": "invalid" }
 			},
-			"endCaptures": {
-				"0": { "name": "keyword.control strong" }
-			},
+			"endCaptures": { "0": { "name": "keyword.control strong" } },
 			"patterns": [
 				{ "include": "#DROPTHROUGH" },
 				{ "include": "#ELSE" },
@@ -237,9 +279,24 @@
 			"match": "(@DROPTHROUGH\\b)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+)(?>\\s+((?>(?!//)[^\\s;])+))?)?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
-				"2": { "patterns": [ { "include": "#assembly" }, { "include": "#invalid" } ] },
-				"3": { "patterns": [ { "include": "#operand" }, { "include": "#invalid" } ] },
-				"4": { "patterns": [ { "include": "#operand" }, { "include": "#invalid" } ] },
+				"2": {
+					"patterns": [
+						{ "include": "#assembly" },
+						{ "include": "#invalid" }
+					]
+				},
+				"3": {
+					"patterns": [
+						{ "include": "#operand" },
+						{ "include": "#invalid" }
+					]
+				},
+				"4": {
+					"patterns": [
+						{ "include": "#operand" },
+						{ "include": "#invalid" }
+					]
+				},
 				"5": { "name": "invalid" }
 			}
 		},
@@ -248,7 +305,19 @@
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "patterns": [ { "include": "#string" } ] },
-				"3": { "patterns": [ { "include": "#macro" }, { "include": "#address" }, { "include": "#ascii-string" }, { "include": "#ascii-letter" }, { "include": "#numeric" }, { "include": "#random" }, { "include": "#assembly" }, { "include": "#string" }, { "include": "#invalid" } ] },
+				"3": {
+					"patterns": [
+						{ "include": "#macro" },
+						{ "include": "#address" },
+						{ "include": "#ascii-string" },
+						{ "include": "#ascii-letter" },
+						{ "include": "#numeric" },
+						{ "include": "#random" },
+						{ "include": "#assembly" },
+						{ "include": "#string" },
+						{ "include": "#invalid" }
+					]
+				},
 				"4": { "name": "invalid" }
 			}
 		},

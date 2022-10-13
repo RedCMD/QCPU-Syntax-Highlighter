@@ -8,7 +8,7 @@
 		{ "include": "#aliases" },
 		{ "include": "source.qcpu2c#operators" },
 		{ "include": "#assembly" },
-		{ "include": "source.qcpu2c#assembly?" },
+		{ "include": "source.qcpu2c#assembly_unknown" },
 		{ "include": "source.qcpu2c#random" },
 		{ "include": "source.qcpu2c#%array" },
 		{ "include": "source.qcpu2c#%function" },
@@ -29,10 +29,10 @@
 			"match": "\\b(?i:DPI|DPL|DKP|RET|NTA|PCM|DPS|PRF|IMM|XCH|AST|RST|INC|DEC|NEG|RSH|ADD|SUB|IOR|AND|XOR|BSL|BPL|BSR|BPR|ENT|DMA|PRT|BRH|JMP|MST|MLD)\\b(?i:\\([A-Z]\\))?",
 			"name": "keyword"
 		},
-        "aliases": {
-            "match": "\\b(?i:FWD|CLR|LCK|ULK|EMPTY|BREAKPOINT|accumulator|acc|zero|zer|forwarded|fwd)\\b",
-            "name": "variable.other.constant"
-        },
+		"aliases": {
+			"match": "\\b(?i:FWD|CLR|LCK|ULK|EMPTY|BREAKPOINT|accumulator|acc|zero|zer|forwarded|fwd)\\b",
+			"name": "variable.other.constant"
+		},
 		"address": {
 			"match": "\\.(?>(\\()([\\w.@]*)(\\))?)?([\\w.@]+)!?\\+?",
 			"captures": {
@@ -40,9 +40,7 @@
 				"1": { "name": "keyword.operator" },
 				"2": {
 					"name": "support.function",
-					"patterns": [
-						{ "include": "source.qcpu2c#macro" }
-					]
+					"patterns": [ { "include": "source.qcpu2c#macro" } ]
 				},
 				"3": { "name": "keyword.operator" },
 				"4": {
