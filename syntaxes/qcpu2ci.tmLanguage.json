@@ -8,6 +8,7 @@
 		{ "include": "#aliases" },
 		{ "include": "source.qcpu2c#operators" },
 		{ "include": "#assembly" },
+		{ "include": "source.qcpu2c#assembly?" },
 		{ "include": "source.qcpu2c#random" },
 		{ "include": "source.qcpu2c#%array" },
 		{ "include": "source.qcpu2c#%function" },
