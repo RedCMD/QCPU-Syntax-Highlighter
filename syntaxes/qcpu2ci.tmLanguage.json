@@ -16,6 +16,7 @@
 		{ "include": "#ADDRESSABLE" },
 		{ "include": "#HEADER" },
 		{ "include": "#ENUMERATION" },
+		{ "include": "#STRUCT" },
 		{ "include": "#INCLUDE" },
 		{ "include": "#ASSOCIATED" },
 		{ "include": "#DECLARE" },
@@ -130,6 +131,20 @@
 			"patterns": [
 				{ "include": "source.qcpu2c#comment" },
 				{ "include": "#DECLARE" },
+				{ "include": "source.qcpu2c#invalid" }
+			]
+		},
+		"STRUCT": {
+			"begin": "(#STRUCT\\b)(?>\\s+((?>(?!//)[^\\s;])+))?(.*)",
+			"end": "#END\\b",
+			"beginCaptures": {
+				"1": { "name": "keyword.control strong" },
+				"2": { "name": "string" },
+				"3": { "name": "invalid" }
+			},
+			"endCaptures": { "0": { "name": "keyword.control strong" } },
+			"patterns": [
+				{ "include": "source.qcpu2c#comment" },
 				{ "include": "source.qcpu2c#invalid" }
 			]
 		},
