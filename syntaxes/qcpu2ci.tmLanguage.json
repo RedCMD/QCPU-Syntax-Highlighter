@@ -35,16 +35,20 @@
 			"name": "variable.other.constant"
 		},
 		"address": {
-			"match": "\\.(?>(\\()([\\w.@]*)(\\))?)?([\\w.@]+)!?\\+?",
+			"match": "([\\w.@]*)\\.(?>(\\()([\\w.@]*)(\\))?)?([\\w.@]+)!?\\+?",
 			"captures": {
 				"0": { "name": "support.function" },
-				"1": { "name": "keyword.operator" },
-				"2": {
+				"1": {
 					"name": "support.function",
 					"patterns": [ { "include": "source.qcpu2c#macro" } ]
 				},
-				"3": { "name": "keyword.operator" },
-				"4": {
+				"2": { "name": "keyword.operator" },
+				"3": {
+					"name": "support.function",
+					"patterns": [ { "include": "source.qcpu2c#macro" } ]
+				},
+				"4": { "name": "keyword.operator" },
+				"5": {
 					"name": "support.function",
 					"patterns": [ { "include": "source.qcpu2c#macro" } ]
 				}
