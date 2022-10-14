@@ -15,7 +15,7 @@
 		{ "include": "#SEGMENT" },
 		{ "include": "#ADDRESSABLE" },
 		{ "include": "#HEADER" },
-		{ "include": "#ENUM" },
+		{ "include": "#ENUMERATION" },
 		{ "include": "#INCLUDE" },
 		{ "include": "#ASSOCIATED" },
 		{ "include": "#DECLARE" },
@@ -118,8 +118,8 @@
 				"2": { "patterns": [ { "include": "#HEADER-arguments" } ] }
 			}
 		},
-		"ENUM": {
-			"begin": "(#ENUM\\b)(?>\\s+((?>(?!//)[^\\s;])+))?(.*)",
+		"ENUMERATION": {
+			"begin": "(#ENUMERATION\\b)(?>\\s+((?>(?!//)[^\\s;])+))?(.*)",
 			"end": "#END\\b",
 			"beginCaptures": {
 				"1": { "name": "keyword.control strong" },
