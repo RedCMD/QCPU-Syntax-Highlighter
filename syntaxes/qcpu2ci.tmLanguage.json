@@ -14,7 +14,7 @@
 		{ "include": "source.qcpu2c#%function" },
 		{ "include": "#SEGMENT" },
 		{ "include": "#ADDRESSABLE" },
-        { "include": "#SECTION" },
+		{ "include": "#SECTION" },
 		{ "include": "#HEADER" },
 		{ "include": "#ENUMERATION" },
 		{ "include": "#STRUCT" },
@@ -78,14 +78,14 @@
 				}
 			]
 		},
-        "SEGMENT": {
+		"SEGMENT": {
 			"match": "(#SEGMENT\\b)(?>\\s+((?>(?!//)[^\\s;])*))?",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
 				"2": { "patterns": [ { "include": "source.qcpu2c#numeric" } ] }
 			}
 		},
-        "ADDRESSABLE": {
+		"ADDRESSABLE": {
 			"match": "(#ADDRESSABLE\\b)(?>\\s+((?>(?!//)[^\\s;.])+)(\\.(?>(?!//)[^\\s;])+)?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
@@ -99,7 +99,7 @@
 				"4": { "name": "invalid" }
 			}
 		},
-        "SECTION": {
+		"SECTION": {
 			"match": "(#SECTION\\b)(?>\\s+((?>(?!//)[^\\s;.])+)(\\.(?>(?!//)[^\\s;])+)?)?(.*)",
 			"captures": {
 				"1": { "name": "keyword.control strong" },
@@ -164,7 +164,7 @@
 			"endCaptures": { "0": { "name": "keyword.control strong" } },
 			"patterns": [
 				{ "include": "source.qcpu2c#comment" },
-                { "include": "#DECLARE" },
+				{ "include": "#DECLARE" },
 				{ "include": "source.qcpu2c#invalid" }
 			]
 		},
